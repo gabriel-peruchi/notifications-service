@@ -6,8 +6,9 @@ export interface NotificationProps {
   recipientId: string
   content: Content
   category: string
-  readAt?: Date | null
   createdAt: Date
+  readAt?: Date | null
+  canceledAt?: Date | null
 }
 
 type NotificationPropsInit = Replace<NotificationProps, { createdAt?: Date }>
@@ -58,6 +59,14 @@ export class Notification {
 
   public get readAt() {
     return this.props.readAt
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date()
+  }
+
+  public get canceledAt() {
+    return this.props.canceledAt
   }
 
   public get createdAt() {
